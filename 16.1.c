@@ -24,12 +24,12 @@ double overallDistance(double *lats,double *lons, int arrsize)
 		distance = distance + distanceKm(lats[i], lats[i + 1], lons[i], lons[i + 1]);
 
 	}
-
 	return distance;
 }
 
 double distanceKm(double lat1, double lat2, double lon1, double lon2)
 {
+	//reusing from last lab
 	lat1 = radianConversion(lat1);
 	lon1 = radianConversion(lon1);
 	lat2 = radianConversion(lat2);
@@ -40,5 +40,6 @@ double distanceKm(double lat1, double lat2, double lon1, double lon2)
 
 double radianConversion(double value)
 {
+	//reusing from last lab
 	return value * (PI / 180.0);
 }
