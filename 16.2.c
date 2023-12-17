@@ -5,35 +5,35 @@
 // function prototypes
 double distanceKm(double , double , double , double);
 double radianConversion(double);
-double * longestDistance( double coordinates[7][2]);
+double longestDistance(double[7][2], int*, int*);
 
 int main()
 {
 	double coordinates[7][2] = { {53.557078,10.023109}, {48.858363,2.294481},{39.562553,2.661947},{ 36.156214, -115.148736},{-22.971177 , -43.182543},{21.281004 , -157.837456},{-28.002695,153.431781} };
 	char *names[][100] = {"HAW Hamburg", "Eiffel Tower", "Palma de Mallorca", "Las Vegas", "Copacabana" , "Waikiki Beach", "Surfer's Paradise"};
-	double* result = longestDistance(coordinates);
+	int locationA, locationB;
+	//calling longestDistance function to get the longest distance and update the values of locationA and locationB
+	double result = longestDistance(coordinates,&locationA,&locationB);
 
-	printf("%s and %s have the largest distance %lf Km.\nYou'd better not walk. Take a flight, instead",names[0][(int)result[1]], names[0][(int)result[2]], result[0]);
+	printf("%s and %s have the largest distance %lf Km.\nYou'd better not walk. Take a flight, instead",names[0][locationA], names[0][locationB], result);
 
 	return 0;
 }
 
-double * longestDistance(double coordinates[7][2])
+double longestDistance(double coordinates[7][2], int *locationA,int *locationB)
 {
-	//sample {{distance,location1,location2}}
-	double result[3]; //this result will have the largest distance at 0th index ,2nd and 3rd index is for the index of coordinates
-	result[0] = 0.0;
+	double result=0.0; 
 	for (int i = 0; i < 7; i++)
 	{
 		for (int j = 0; j < 7; j++)
 		{
 			double distance = distanceKm(coordinates[i][0], coordinates[j][0], coordinates[i][1], coordinates[j][1]);
 
-			if (distance > result[0])
+			if (distance > result)
 			{
-				result[0] = distance;
-				result[1] = i;
-				result[2] = j;
+				result = distance;
+				*locationA = i;
+				*locationB = j; 
 			}
 		}
 	}
